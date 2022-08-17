@@ -19,6 +19,9 @@ const list = [
   },
 ];
 
+// note to remember
+// App, List, and Search use arrow function syntax and omit return statement
+// because no other logic is performed
 const App = () => (
   <div>
     <h1>My Hacker Stories</h1>
@@ -46,11 +49,21 @@ const List = () => (
   </ul>
 );
 
-const Search = () => (
-  <div>
-    <label htmlFor="search">Search: </label>
-    <input id="search" type = "text" />
-  </div>
-)
+const Search = () => {
+  const handleChange = (event) => {
+    //synthetic event
+    console.log(event);
+    //value of target  (here: element)
+    console.log(event.target.value);
+  };
+  
+  return(
+    <div>
+      <label htmlFor="search">Search: </label>
+      {/* Note: only pass function (e.g. handleChange), not a function call (e.g. handleChange()) */}
+      <input id="search" type = "text" onChange={handleChange}/>
+    </div>
+  );
+};
 
 export default App;
