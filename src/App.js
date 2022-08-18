@@ -6,6 +6,8 @@ import * as React from 'react';
 // App, List, and Search use arrow function syntax and omit return statement
 // because no other logic is performed
 const App = () => {
+  console.log('App renders');
+
   const stories = [
     {
       title: 'React',
@@ -38,31 +40,37 @@ const App = () => {
   }
 
 
-const List = (props) => (
-  <ul>
-    {props.list.map((item) => {
-      return <Item key={item.objectID} item={item} /> 
-    })}
-  </ul>
-);
+const List = (props) => {
+  console.log('List renders');  
+  return (
+    <ul>
+      {props.list.map((item) => {
+        return <Item key={item.objectID} item={item} /> 
+      })}
+    </ul>
+  );
+}
 
-const Item = (props) => (
-  <li>
-    <span>
-      <a href={props.item.url}>{props.item.title}</a>
-    </span>
-    <span>{props.item.author}</span>
-    <span>{props.item.num_comments}</span>
-    <span>{props.item.points}</span>
-  </li>
-);
+const Item = (props) => {
+  console.log('Item renders');
+  return(
+    <li>
+      <span>
+        <a href={props.item.url}>{props.item.title}</a>
+      </span>
+      <span>{props.item.author}</span>
+      <span>{props.item.num_comments}</span>
+      <span>{props.item.points}</span>
+   </li>
+  );
+}
 
 const Search = () => {
+  console.log('Search renders');
+  let [searchTerm, setSearchTerm] = React.useState('');
+  
   const handleChange = (event) => {
-    //synthetic event
-    console.log(event);
-    //value of target  (here: element)
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
   
   return(
@@ -70,6 +78,10 @@ const Search = () => {
       <label htmlFor="search">Search: </label>
       {/* Note: only pass function (e.g. handleChange), not a function call (e.g. handleChange()) */}
       <input id="search" type = "text" onChange={handleChange}/>
+
+      <p>
+        Searching for <strong>{searchTerm}</strong>.
+      </p>
     </div>
   );
 };
