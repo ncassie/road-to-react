@@ -51,33 +51,32 @@ const App = () => {
   }
 
 
-const List = (props) => {
+const List = ({list}) => {
   console.log('List renders');  
   return (
     <ul>
-      {props.list.map((item) => {
+      {list.map((item) => {
         return <Item key={item.objectID} item={item} /> 
       })}
     </ul>
   );
 }
 
-const Item = (props) => {
+const Item = ({item}) => {
   console.log('Item renders');
   return(
     <li>
       <span>
-        <a href={props.item.url}>{props.item.title}</a>
+        <a href={item.url}>{item.title}</a>
       </span>
-      <span>{props.item.author}</span>
-      <span>{props.item.num_comments}</span>
-      <span>{props.item.points}</span>
+      <span>{item.author}</span>
+      <span>{item.num_comments}</span>
+      <span>{item.points}</span>
    </li>
   );
 }
 
-const Search = (props) => {
-  console.log('Search renders');
+const Search = ({search, onSearch}) => {
   
   return(
     <div>
@@ -86,8 +85,8 @@ const Search = (props) => {
       <input 
         id="search" 
         type = "text" 
-        value={props.search}
-        onChange={props.onSearch}
+        value={search}
+        onChange={onSearch}
       />
     </div>
   );
